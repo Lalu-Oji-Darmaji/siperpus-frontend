@@ -1,17 +1,36 @@
+// src/router/index.js — tambahkan route katalog
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
+
   routes: [
     {
       path: '/',
       name: 'home',
-      // Lazy loading — komponen dimuat saat halaman pertama dikunjungi
       component: () => import('../views/HomeView.vue'),
-      meta: { title: 'Beranda — SiPerpus' }
+      meta: { title: 'Beranda' }
     },
-    // Route-route lain ditambahkan di Bab 4 (Routing & State Management)
+    {
+      path: '/katalog',
+      name: 'katalog',
+      component: () => import('../views/KatalogView.vue'),
+      meta: { title: 'Katalog Buku' }
+    },
+    // Route lain ditambahkan di Bab 4
   ],
+
+  scrollBehavior: () => ({
+    top: 0,
+    behavior: 'smooth'
+  })
 })
+
+// Update title halaman otomatis
+router.afterEach((to) => {
+  document.title = to.meta.title
+    ? `${to.meta.title} — SiPerpus`
+    : 'SiPerpus'
+})
+
 export default router
