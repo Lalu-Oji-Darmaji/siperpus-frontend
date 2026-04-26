@@ -17,6 +17,12 @@ const router = createRouter({
       component: () => import('../views/KatalogView.vue'),
       meta: { title: 'Katalog Buku' }
     },
+    {
+      path: '/test-shadcn',
+      name: 'test-shacdn',
+      component: () => import('../views/TestShadcn.vue'),
+      meta: { title: 'Katalog Buku' }
+    },
     // Route lain ditambahkan di Bab 4
   ],
 

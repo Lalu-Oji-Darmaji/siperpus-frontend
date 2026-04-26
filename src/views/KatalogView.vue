@@ -19,13 +19,13 @@
           class="input-search"
           @keyup.escape="kataCari = ''"
         />
-        <button
+        <Button
           v-if="kataCari"
           class="btn-clear"
           @click="kataCari = ''"
         >
           ✖
-        </button>
+        </Button>
       </div>
 
       <!-- FILTER KATEGORI -->
@@ -42,14 +42,14 @@
 
       <!-- FILTER STATUS -->
       <div class="filter-status">
-        <button
+        <Button
           v-for="s in statusOptions"
           :key="s.value"
           :class="['btn-status', { aktif: filterStatus === s.value }]"
           @click="filterStatus = s.value"
         >
           {{ s.label }}
-        </button>
+        </Button>
       </div>
     </div>
 
@@ -61,7 +61,7 @@
     <!-- KOSONG -->
     <div v-else-if="bukuTerfilter.length === 0" class="state-kosong">
       <p>📭 Tidak ada buku yang cocok dengan pencarian Anda.</p>
-      <button @click="resetFilter" class="btn-reset">Reset Filter</button>
+      <Button @click="resetFilter" class="btn-reset">Reset Filter</Button>
     </div>
 
     <!-- DATA -->
@@ -89,27 +89,27 @@
         </p>
 
         <div class="kartu-actions">
-          <button class="btn-detail" @click="lihatDetail(buku)">
+          <Button class="btn-detail" @click="lihatDetail(buku)">
             Detail
-          </button>
-          <button
+          </Button>
+          <Button
             v-if="buku.tersedia"
             class="btn-pinjam"
             @click="pinjamBuku(buku.id)"
           >
             Pinjam
-          </button>
+          </Button>
         </div>
       </div>
     </div>
 
     <!-- FILTER LANJUTAN -->
-    <button
+    <Button
       class="btn-filter-toggle"
       @click="panelFilterTerbuka = !panelFilterTerbuka"
     >
       {{ panelFilterTerbuka ? 'Sembunyikan' : 'Tampilkan' }} Filter Lanjutan
-    </button>
+    </Button>
 
     <div v-show="panelFilterTerbuka" class="panel-filter-lanjutan">
       <h4>Filter Lanjutan</h4>
@@ -131,7 +131,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { vFocus } from '@/directives/vFocus'
 import { vHighlight } from '@/directives/vHighlight'
-
+import { Button } from '@/components/ui/button'
 // STATE
 const kataCari = ref('')
 const filterKategori = ref('')
