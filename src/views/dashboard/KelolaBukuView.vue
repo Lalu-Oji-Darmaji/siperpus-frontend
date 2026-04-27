@@ -57,14 +57,14 @@ const isDialogOpen = ref(false)
 
 // Data Dummy
 const koleksiBuku = ref([
-   { id: 1, judul: 'Clean Code', penulis: 'Robert C. Martin', kategori: 'Teknologi', penerbit: 'Prentice Hall', tahun: 2008, tersedia: true, sinopsis: 'Panduan menulis kode yang rapi dan mudah dipelihara.' },
-  { id: 2, judul: 'Vue.js 3 for Beginners', penulis: 'Simone Cuomo', kategori: 'Teknologi', penerbit: 'Packt', tahun: 2024, tersedia: false, sinopsis: 'Belajar Vue dari dasar hingga mahir.' },
-  { id: 3, judul: 'Learning Vue', penulis: 'Maya Shavin', kategori: 'Teknologi', penerbit: "O'Reilly", tahun: 2024, tersedia: true },
-  { id: 4, judul: 'Bumi', penulis: 'Tere Liye', kategori: 'Fiksi', penerbit: 'Gramedia', tahun: 2014, tersedia: true },
-  { id: 5, judul: 'Sapiens', penulis: 'Yuval Noah Harari', kategori: 'Sejarah', penerbit: 'Harper', tahun: 2011, tersedia: false },
-  { id: 6, judul: 'Atomic Habits', penulis: 'James Clear', kategori: 'Bisnis', penerbit: 'Avery', tahun: 2018, tersedia: true },
-  { id: 7, judul: 'The Pragmatic Programmer', penulis: 'David Thomas', kategori: 'Teknologi', penerbit: 'Addison-Wesley', tahun: 1999, tersedia: true },
-  { id: 8, judul: 'Laskar Pelangi', penulis: 'Andrea Hirata', kategori: 'Fiksi', penerbit: 'Bentang', tahun: 2005, tersedia: false }
+    { id: 1, judul: 'Clean Code', penulis: 'Robert C. Martin', kategori: 'Teknologi', penerbit: 'Prentice Hall', tahun: 2008, tersedia: true, sinopsis: 'Panduan menulis kode yang rapi dan mudah dipelihara.' },
+    { id: 2, judul: 'Vue.js 3 for Beginners', penulis: 'Simone Cuomo', kategori: 'Teknologi', penerbit: 'Packt', tahun: 2024, tersedia: false, sinopsis: 'Belajar Vue dari dasar hingga mahir.' },
+    { id: 3, judul: 'Learning Vue', penulis: 'Maya Shavin', kategori: 'Teknologi', penerbit: "O'Reilly", tahun: 2024, tersedia: true },
+    { id: 4, judul: 'Bumi', penulis: 'Tere Liye', kategori: 'Fiksi', penerbit: 'Gramedia', tahun: 2014, tersedia: true },
+    { id: 5, judul: 'Sapiens', penulis: 'Yuval Noah Harari', kategori: 'Sejarah', penerbit: 'Harper', tahun: 2011, tersedia: false },
+    { id: 6, judul: 'Atomic Habits', penulis: 'James Clear', kategori: 'Bisnis', penerbit: 'Avery', tahun: 2018, tersedia: true },
+    { id: 7, judul: 'The Pragmatic Programmer', penulis: 'David Thomas', kategori: 'Teknologi', penerbit: 'Addison-Wesley', tahun: 1999, tersedia: true },
+    { id: 8, judul: 'Laskar Pelangi', penulis: 'Andrea Hirata', kategori: 'Fiksi', penerbit: 'Bentang', tahun: 2005, tersedia: false }
 ])
 
 // Logika Integrasi
