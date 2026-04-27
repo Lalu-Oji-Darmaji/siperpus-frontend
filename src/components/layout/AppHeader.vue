@@ -24,21 +24,14 @@ import {
 
 const router = useRouter()
 const kataCariHeader = ref('')
-
+import { storeToRefs } from 'pinia'
+import { useAuthStore } from '@/stores/auth'
+// import { useRouter } from 'vue-router'
+// ... import komponen shadcn seperti sebelumnya ...
+const authStore = useAuthStore()
+// Gunakan storeToRefs agar nilai tetap reaktif
+const { isLoggedIn, isPustakawan, namaUser, inisialUser } =storeToRefs(authStore)
 // Data user - Mocking (Nanti di Bab 4 menggunakan Pinia Store)
-const namaUser = ref('Ahmad Fauzi')
-const isPustakawan = ref(false)
-
-// PERBAIKAN: split(' ') untuk memisahkan kata, bukan karakter
-const inisialUser = computed(() => {
-    if (!namaUser.value) return '??'
-    return namaUser.value
-        .split(' ')
-        .map(n => n[0])
-        .join('')
-        .toUpperCase()
-        .slice(0, 2)
-})
 
 const navItems = [
     { to: '/', label: 'Beranda', icon: Home },
@@ -50,6 +43,14 @@ function cariDariHeader() {
     // Pastikan route 'katalog' sudah terdaftar di router/index.js
     router.push({ path: '/katalog', query: { q: kataCariHeader.value } })
     kataCariHeader.value = ''
+}
+
+
+// Hapus data user hardcode dan gunakan dari store
+// const namaUser = ref('Ahmad Fauzi') <- HAPUS
+function handleLogout() {
+    authStore.logout()
+    router.push({ name: 'home' })
 }
 </script>
 
@@ -122,7 +123,7 @@ function cariDariHeader() {
                         
                         <DropdownMenuSeparator />
                         
-                        <DropdownMenuItem class="text-destructive focus:bg-destructive focus:text-destructive-foreground cursor-pointer">
+                        <DropdownMenuItem @click="handleLogout" class="text-destructive focus:bg-destructive focus:text-destructive-foreground cursor-pointer">
                             <LogOut class="mr-2 h-4 w-4" /> Keluar
                         </DropdownMenuItem>
                     </DropdownMenuContent>

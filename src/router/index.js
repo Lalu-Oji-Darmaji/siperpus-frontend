@@ -1,42 +1,112 @@
-// src/router/index.js — tambahkan route katalog
 import { createRouter, createWebHistory } from 'vue-router'
+import { useAuthStore } from '@/stores/auth'
 
 const router = createRouter({
+  // Menggunakan mode HTML5 History (URL bersih tanpa '#')
   history: createWebHistory(import.meta.env.BASE_URL),
-
+  
   routes: [
+    // --- HALAMAN PUBLIK ---
     {
       path: '/',
       name: 'home',
-      component: () => import('../views/HomeView.vue'),
+      component: () => import('@/views/HomeView.vue'),
       meta: { title: 'Beranda' }
     },
     {
       path: '/katalog',
       name: 'katalog',
-      component: () => import('../views/KatalogView.vue'),
+      component: () => import('@/views/KatalogView.vue'),
       meta: { title: 'Katalog Buku' }
     },
     {
-      path: '/test-shadcn',
-      name: 'test-shacdn',
-      component: () => import('../views/TestShadcn.vue'),
-      meta: { title: 'Katalog Buku' }
+      path: '/katalog/:id',
+      name: 'detail-buku',
+      component: () => import('@/views/DetailBukuView.vue'),
+      meta: { title: 'Detail Buku' }
     },
-    // Route lain ditambahkan di Bab 4
+    {
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/LoginView.vue'),
+      meta: { title: 'Login', requiresGuest: true }
+    },
+
+    // --- DASHBOARD (NESTED ROUTES) ---
+    {
+      path: '/dashboard',
+      component: () => import('@/layouts/DashboardLayout.vue'),
+      meta: { requiresAuth: true, role: 'pustakawan' },
+      children: [
+        {
+          path: '', 
+          name: 'dashboard',
+          component: () => import('@/views/dashboard/DashboardHomeView.vue'),
+          meta: { title: 'Dashboard' }
+        },
+        {
+          path: 'buku',
+          name: 'kelola-buku',
+          component: () => import('@/views/dashboard/KelolaBukuView.vue'),
+          meta: { title: 'Kelola Buku' }
+        },
+        {
+          path: 'buku/tambah',
+          name: 'tambah-buku',
+          component: () => import('@/views/dashboard/TambahBukuView.vue'),
+          meta: { title: 'Tambah Buku' }
+        },
+        {
+          path: 'buku/:id/edit',
+          name: 'edit-buku',
+          component: () => import('@/views/dashboard/EditBukuView.vue'),
+          meta: { title: 'Edit Buku' }
+        },
+        {
+          path: 'anggota',
+          name: 'kelola-anggota',
+          component: () => import('@/views/dashboard/KelolaAnggotaView.vue'),
+          meta: { title: 'Kelola Anggota' }
+        },
+        {
+          path: 'peminjaman',
+          name: 'peminjaman',
+          component: () => import('@/views/dashboard/PeminjamanView.vue'),
+          meta: { title: 'Peminjaman' }
+        },
+        {
+          path: 'laporan',
+          name: 'laporan',
+          component: () => import('@/views/dashboard/LaporanView.vue'),
+          meta: { title: 'Laporan' }
+        },
+      ]
+    },
+
+    // --- PROFIL ANGGOTA ---
+    {
+      path: '/profil',
+      name: 'profil',
+      component: () => import('@/views/ProfilView.vue'),
+      meta: { title: 'Profil Saya', requiresAuth: true }
+    },
+
+    // --- CATCH-ALL 404 ---
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'not-found',
+      component: () => import('@/views/NotFoundView.vue'),
+      meta: { title: 'Halaman Tidak Ditemukan' }
+    },
   ],
 
-  scrollBehavior: () => ({
-    top: 0,
-    behavior: 'smooth'
-  })
-})
-
-// Update title halaman otomatis
-router.afterEach((to) => {
-  document.title = to.meta.title
-    ? `${to.meta.title} — SiPerpus`
-    : 'SiPerpus'
+  // Kontrol perilaku scroll saat berpindah halaman
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    return { top: 0, behavior: 'smooth' }
+  },
 })
 
 export default router
